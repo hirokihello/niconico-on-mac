@@ -7,7 +7,16 @@
 // const electron = require('electron')
 // import electron from "electron"
 
-console.log(window.customRenderMethod)
-window.customRenderMethod();
+// console.log(window.customRenderMethod)
+// window.customRenderMethod();
 // window.close()
-console.log("hogehogeo")
+
+console.log("initialize window renderer loaded")
+
+document.getElementById("submit_button").addEventListener("click", () => {
+  url = document.getElementById("url").value;
+  ui_type = document.getElementById("ui_type").value;
+
+  console.log({url, ui_type})
+  console.log("submit!!!!")
+})

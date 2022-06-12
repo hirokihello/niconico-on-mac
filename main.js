@@ -17,21 +17,21 @@ function createNicoNicoWindow () {
     } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
   })
 
-  // mainWindow.loadFile('niconico/index.html')
+  mainWindow.loadFile('niconico/index.html')
 
   // 他で立ち上げてるプロセスにアクセスすることもできる。
-  if (isDev) {
-    mainWindow.loadURL('http://localhost:3000/index.html');
-  } else {
-    // 'build/index.html'
-    mainWindow.loadURL(`file://${__dirname}/../index.html`);
-  }
+  // if (isDev) {
+  //   mainWindow.loadURL('http://localhost:3000/index.html');
+  // } else {
+  //   // 'build/index.html'
+  //   mainWindow.loadURL(`file://${__dirname}/../index.html`);
+  // }
   // 全画面表示
-  // mainWindow.setSimpleFullScreen(true);
-  // // ワークスペース（デスクトップ）を移動しても表示される
-  // mainWindow.setVisibleOnAllWorkspaces(true)
-  // // 他のアプリの画面のマウスイベントを規制する
-  // mainWindow.setIgnoreMouseEvents(true);
+  mainWindow.setSimpleFullScreen(true);
+  // ワークスペース（デスクトップ）を移動しても表示される
+  mainWindow.setVisibleOnAllWorkspaces(true)
+  // 他のアプリの画面のマウスイベントを規制する
+  mainWindow.setIgnoreMouseEvents(true);
 }
 
 function createWindow () {

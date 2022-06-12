@@ -2,4 +2,4 @@ init:
 	npm install
 
 run:
-	npm run start
+	npm run start-electron

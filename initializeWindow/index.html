@@ -2,13 +2,54 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'">
     <link href="./styles.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>main window of mac messaging app</title>
   </head>
   <body>
-    <p>hoge</p>
+    <div class="container mx-auto h-screen">
+      <div class="h-screen flex items-center justify-center">
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/2">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="url">
+              url
+            </label>
+            <input
+              class="
+                shadow
+                appearance-none
+                border rounded py-2 px-3 text-gray-700 w-full leading-tight focus:outline-none focus:shadow-outline"
+              id="url"
+              type="text"
+              placeholder="url"
+            >
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="url">
+              ui
+            </label>
+            <div class="relative">
+              <select
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="ui_type"
+              >
+                <option>nico like</option>
+                <option>simple messages</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="submit_button">
+              start
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="./renderer.js"></script>
 </html>
