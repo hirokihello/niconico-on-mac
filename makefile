@@ -1,5 +1,5 @@
 init:
 	npm install
 
-init:
+run:
 	npm run start

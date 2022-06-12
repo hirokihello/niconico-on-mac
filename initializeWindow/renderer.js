@@ -4,4 +4,9 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
-const electron = require('electron')
+// const electron = require('electron')
+// import electron from "electron"
+
+console.log(window.customRenderMethod)
+window.customRenderMethod();
+window.close()
