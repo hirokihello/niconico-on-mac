@@ -4,7 +4,7 @@ const path = require('path');
 const isDev =  require('electron-is-dev');
 app.dock.hide()          // 画面を切り替えても最前面に表示するために必要
 
-function createNicoNicoWindow () {
+function createMessageWindow (file) {
   const mainWindow = new BrowserWindow({
     frame: true,
     show: true,
@@ -17,7 +17,7 @@ function createNicoNicoWindow () {
     } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
   })
 
-  mainWindow.loadFile('niconico/index.html')
+  mainWindow.loadFile(file)
 
   // 他で立ち上げてるプロセスにアクセスすることもできる。
   // if (isDev) {
@@ -42,7 +42,7 @@ function createWindow () {
     hasShadow: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: false,
+      contextIsolation: true,
     } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
   })
 
@@ -62,7 +62,8 @@ app.whenReady().then(() => {
   })
 })
 
-ipcMain.handle("custom-ready", createNicoNicoWindow)
+ipcMain.handle("genBrowserNiconico", () => createMessageWindow('niconico/index.html'));
+ipcMain.handle("genBrowserPoco", () => createMessageWindow('poco/index.html'));
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
