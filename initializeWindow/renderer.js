@@ -9,4 +9,5 @@
 
 console.log(window.customRenderMethod)
 window.customRenderMethod();
-window.close()
+// window.close()
+console.log("hogehogeo")

@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path');
-
+const isDev =  require('electron-is-dev');
 app.dock.hide()          // 画面を切り替えても最前面に表示するために必要
 
 function createNicoNicoWindow () {
@@ -13,16 +13,25 @@ function createNicoNicoWindow () {
     hasShadow: false,
     alwaysOnTop: true,
     webPreferences: {
-      nodeIntegration: true
-  } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
-})
-  // 全画面表示0
-  mainWindow.setSimpleFullScreen(true);
-  mainWindow.loadFile('niconico/index.html')
-  mainWindow.setVisibleOnAllWorkspaces(true)      // ワークスペース（デスクトップ）を移動しても表示される
+      preload: path.join(__dirname, 'preload.js'),
+    } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
+  })
 
-  // 他のアプリの画面のマウスイベントを規制する
-  mainWindow.setIgnoreMouseEvents(true);
+  // mainWindow.loadFile('niconico/index.html')
+
+  // 他で立ち上げてるプロセスにアクセスすることもできる。
+  if (isDev) {
+    mainWindow.loadURL('http://localhost:3000/index.html');
+  } else {
+    // 'build/index.html'
+    mainWindow.loadURL(`file://${__dirname}/../index.html`);
+  }
+  // 全画面表示
+  // mainWindow.setSimpleFullScreen(true);
+  // // ワークスペース（デスクトップ）を移動しても表示される
+  // mainWindow.setVisibleOnAllWorkspaces(true)
+  // // 他のアプリの画面のマウスイベントを規制する
+  // mainWindow.setIgnoreMouseEvents(true);
 }
 
 function createWindow () {
@@ -35,8 +44,9 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: false,
     } //nodejsのAPIにブラウザで呼び出すjsがアクセスできるようにするconf
-})
-  // 全画面表示0
+  })
+
+  // // 全画面表示0
   mainWindow.loadFile('./initializeWindow/index.html')
 }
 // This method will be called when Electron has finished
